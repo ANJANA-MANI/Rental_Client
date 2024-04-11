@@ -1,0 +1,50 @@
+
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
+import Home from './Pages/Home';
+import CreateListing from './Pages/CreateListing';
+import ListingDetails from './Pages/ListingDetails';
+import Triplist from './Pages/Triplist';
+import Whishlist from './Pages/Whishlist';
+import PropertyList from './Pages/PropertyList';
+import ReservationList from './Pages/ReservationList';
+import PaymentForm from './Components/Payment';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import Cateogry from './Pages/Cateogry';
+import Search from './Pages/Search';
+
+const stripePromise = loadStripe('YOUR_PUBLISHABLE_KEY');
+
+function App() {
+  return (
+ <>
+ <Elements stripe={stripePromise}>
+ <Routes>
+  <Route path="/" element={<Home/>}></Route>
+  <Route path="/Register" element={<Register/>}></Route>
+  <Route path="/Login" element={<Login/>}></Route>
+  
+  <Route path="/Createlisting" element={<CreateListing/>}></Route>
+  <Route path="/ListingDetails" element={<ListingDetails/>}></Route>
+  <Route path="/:userId/TripList" element={<Triplist/>}></Route>
+  <Route path="/:userId/Wishlist" element={<Whishlist/>}></Route>
+ 
+  <Route path="/:userId/properties" element={<PropertyList/>}></Route>
+  <Route path="/:userId/reservations" element={<ReservationList/>}></Route>
+ 
+  <ProtectedRoute path="/properties/:listingId" element={<ListingDetails />} />
+  <Route path="/properties/category/:category" element={<Cateogry/>}></Route>
+  <Route path="/properties/search/:search" element={<Search/>}></Route>
+ 
+ 
+ </Routes>
+  
+        </Elements>
+ </>
+  );
+}
+
+export default App;

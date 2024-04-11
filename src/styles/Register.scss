@@ -1,0 +1,9 @@
+
+@import "./breakpoints.scss";
+.register {
+   
+    @include sm {
+     background-image: none;
+  }
+    
+  }

@@ -1,0 +1,17 @@
+/* CSS File */
+
+@media (max-width: 600px) {
+    .register {
+      background-position: center;
+     
+    }
+  }
+  
+  @media (min-width: 601px) and (max-width: 900px) {
+    .register {
+        background-position: center;
+    }
+  }
+  
+ 
+  
