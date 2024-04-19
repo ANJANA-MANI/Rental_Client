@@ -90,6 +90,7 @@ function Navbar({hide}) {
             <Link
               to="/Login"
               onClick={() => {
+                console.log('logging out...');
                 setIsAuthorized(false);
                 dispatch(setLogout());
               }}

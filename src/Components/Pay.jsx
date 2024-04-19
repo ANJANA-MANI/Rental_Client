@@ -3,8 +3,8 @@ import { paymentAPI } from '../Services/allAPI'
 import {loadStripe} from '@stripe/stripe-js';
 function Pay({totalPrice,listingId,title}) {
 //console.log('totalPrice,listingId,title',totalPrice,listingId,title);
-    const makePayment=async()=>{
-     const stripe=await loadStripe("pk_test_51P3DOpSHryFcL7Pw653UOyZcTZs4bELA7ahF0kCuGgrFZi2q4ASnTYBo8f49vfFxHEDadw1ZU5Ix7DyifXYCVfgD00MHRV7gqm")
+  const makePayment=async()=>{
+  const stripe=await loadStripe("pk_test_51P3DOpSHryFcL7Pw653UOyZcTZs4bELA7ahF0kCuGgrFZi2q4ASnTYBo8f49vfFxHEDadw1ZU5Ix7DyifXYCVfgD00MHRV7gqm")
    const product=[{title,totalPrice,listingId}]
    const businessTypes="company"
    const reqbody={products:product,businessTypes}
@@ -13,7 +13,6 @@ function Pay({totalPrice,listingId,title}) {
    const result2=stripe.redirectToCheckout({
    sessionId:result.data.id.id
    })   
-  
    
     }
   return (

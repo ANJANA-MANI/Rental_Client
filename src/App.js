@@ -16,12 +16,13 @@ import Cateogry from './Pages/Cateogry';
 import Search from './Pages/Search';
 import PaymentSuccess from './Components/PaymentSuccess';
 import PaymentFail from './Components/PaymentFail';
-import { useContext } from 'react';
-import { tokenAuthorizationContext } from './context/TokenAuth';
+import { useSelector } from 'react-redux';
+
 const stripePromise = loadStripe('YOUR_PUBLISHABLE_KEY');
 
 function App() {
-  const{isAuthorized,setIsAuthorized}=useContext(tokenAuthorizationContext)
+ 
+  const isAuthorized= useSelector((state) => state.user)
   return (
  <>
  <Elements stripe={stripePromise}>

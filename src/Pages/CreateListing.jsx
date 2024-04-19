@@ -4,7 +4,6 @@ import '../styles/createlisting.scss'
 import { categories } from '../data'
 import { types } from '../data'
 import { facilities } from '../data'
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { RemoveCircleOutline } from '@mui/icons-material'
 import { AddCircleOutline } from '@mui/icons-material'
 import { IoIosImages } from "react-icons/io";
@@ -40,7 +39,7 @@ const[bathroomCount,setBathroomCount]=useState(1)
    
 
 //amenites
-const[amenities,setAmenities]=useState([{}])
+const[amenities,setAmenities]=useState([])
 const handleSelectAmenities=(facility)=>{
    
     if(amenities.includes(facility))
@@ -411,7 +410,7 @@ alert('please login to continue')
         </>
     )}
 </div>
-<h3>What make you place attractive and exciting?</h3>
+<h3>What makes your place attractive and exciting?</h3>
 <div className="description">
     <p>Title</p>
     <input type="text"  placeholder="Title" name="title" value={formDescription.title||""} required onChange={handleChangeDescription}/>

@@ -13,7 +13,7 @@ function PaymentFail() {
     };
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <img src="/assets/failure.gif" alt="Failure" style={{ width: '150px', height: '150px', marginBottom: '20px' }} />
+            <img src="/assets/failure.gif" alt="Failure" style={{ width: '350px', height: '250px', marginBottom: '20px' }} />
             <h1 style={{ fontSize: '24px', marginBottom: '20px' }}>Payment Failed!</h1>
             <p style={{ fontSize: '16px', marginBottom: '20px' }}>We're sorry, but there was an issue processing your payment.</p>
             <p style={{ fontSize: '16px', marginBottom: '20px' }}>Please try again later or contact customer support for assistance.</p>
