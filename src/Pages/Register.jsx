@@ -20,7 +20,8 @@ import regbackground from "../assets/regbackground.jpeg";
 import '../styles/Register.css'
 import '../styles/Register.scss'
 import {registerAPI} from '../Services/allAPI'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const BootstrapButton = styled(Button)({
     boxShadow: 'none',
     textTransform: 'none',
@@ -118,7 +119,7 @@ e.preventDefault()
 console.log('registering.....');
   const{firstname,lastname,email,password,profileImage}=formData
   if(!firstname ||!lastname ||!password||!email){
-    alert("Please fill the missing fields")
+    toast.warning("Please fill the missing fields")
   }
   else
   {
@@ -133,14 +134,14 @@ console.log('registering.....');
      const reqheader={
       "Content-Type":"multipart/form-data"
     }
-
     //api call
     const result=await registerAPI(reqbody,reqheader)
-   
+
     console.log('RESULT',result);
     if(result.status===200)
     {
-      alert(`${result.data.firstname} has registered sucessfully`)
+      //alert(`${result.data.firstname} has registered sucessfully`)
+      toast.success(`${result.data.firstname} has registered sucessfully`)
       //console.log(`${result.data.token}`);
       setFormData({firstname:"",
       lastname:"",
@@ -150,11 +151,12 @@ console.log('registering.....');
       profileImage:""
 
       })
-      navigate('/Login')
+      setTimeout(()=>navigate('/Login'),4000)
+     
     }
     else 
     {
-      alert(`${result.response.data}`)
+      toast.error(`${result.response.data}`)
     }
 
     
@@ -278,7 +280,7 @@ console.log('registering.....');
           onChange={handleChange} />
 </Button>
 {
-  formData.profileImage && (<img style={{borderRadius:"50%",width:"100px",height:"100px",margin:"10px",objectFit:"contain"}} alt="pic" src={URL.createObjectURL(formData.profileImage)}></img>)
+  formData.profileImage && (<img style={{borderRadius:"50%",width:"100px",height:"100px",margin:"10px",objectFit:"contain"}} alt="pic" src={preview}></img>)
 }
 </FormControl>
 <FormControl sx={{ m: 1,display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -291,10 +293,13 @@ console.log('registering.....');
         </FormControl>
 
 
+      
       </div>
     
     </Box>
+
     </div>
+    <ToastContainer />
     </>
    
   )

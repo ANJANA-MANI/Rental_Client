@@ -41,10 +41,12 @@ function ReservationList() {
   return (loading ? (<Loader />) : (
     <>
       <Navbar />
-      
+      <div className="container">
       <h1 className="title-list">Your Resrvation List</h1>
       <div className="list">
-        {Reservationlist ?.map(({ listingId, hostId, startDate, endDate, totalPrice, booking=true }) => (
+        {
+        Reservationlist?.length > 0 ? (
+        Reservationlist ?.map(({ listingId, hostId, startDate, endDate, totalPrice, booking=true,customerId }) => (
           <Listingcards
             listingId={listingId._id}
             creator={hostId._id}
@@ -57,10 +59,19 @@ function ReservationList() {
             endDate={endDate}
             totalPrice={totalPrice}
             booking={booking}
-            pay={false}
+            reservation={true}
+            guest={customerId}
           />
-        ))}
+        ))
+      ):(<div className="empty-state">
+       
+        <img src="https://cdn.dribbble.com/users/1753953/screenshots/3818675/animasi-emptystate.gif"
+         alt="Gift" width={"400px"} height={"350px"} />
+       
+      </div>)}
       </div>
+      </div>
+      
        
       
 

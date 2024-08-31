@@ -16,7 +16,7 @@ function Listings() {
  
  const getListings=async(e)=>{
   //e.preventDefault();
-  console.log('loading......'); 
+  //console.log('loading......'); 
   const result=selectedCategory!=='All'?await viewOneAPI(selectedCategory):await viewAllAPI();
   //console.log(result);
   if(result.status==200)
@@ -27,7 +27,7 @@ function Listings() {
      setLoading(false)
     }
   }
-  console.log('state Listings',listings);
+  //console.log('state Listings',listings);
 }
  useEffect(()=>{
   getListings()
@@ -63,6 +63,7 @@ function Listings() {
               booking=false
             }) => (
               <Listingcards
+             
                 listingId={_id}
                 creator={owner}
                 listingPhotos={listingPhotos}
@@ -74,6 +75,7 @@ function Listings() {
                 price={price}
                 booking={booking}
                 title={title}
+                home={true}
               />
             )
           )}

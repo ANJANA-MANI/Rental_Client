@@ -17,6 +17,7 @@ import Search from './Pages/Search';
 import PaymentSuccess from './Components/PaymentSuccess';
 import PaymentFail from './Components/PaymentFail';
 import { useSelector } from 'react-redux';
+import Hostproperty from './Pages/Hostproperty';
 
 const stripePromise = loadStripe('YOUR_PUBLISHABLE_KEY');
 
@@ -31,7 +32,7 @@ function App() {
   <Route path="/Register" element={<Register/>}></Route>
   <Route path="/Login" element={<Login/>}></Route>
 
-  <Route path="/Payment/Completed" element={isAuthorized?<PaymentSuccess/>:<Home/>}></Route>
+  <Route path="/Payment/Completed/:listingId" element={isAuthorized?<PaymentSuccess/>:<Home/>}></Route>
   <Route path="/Payment/Failed" element={isAuthorized?<PaymentFail/>:<Home/>}></Route>
   <Route path="/Createlisting" element={isAuthorized?<CreateListing/>:<Home/>}></Route>
   <Route path="/ListingDetails" element={isAuthorized?<ListingDetails/>:<Home/>}></Route>
@@ -42,6 +43,8 @@ function App() {
   <Route path="/properties/:listingId" element={isAuthorized?<ListingDetails/>:<Home/>}></Route>
   <Route path="/properties/category/:category" element={isAuthorized?<Cateogry/>:<Home/>}></Route>
   <Route path="/properties/search/:search" element={isAuthorized?<Search/>:<Home/>}></Route>
+  <Route path='/host/properties/:id' element={<Hostproperty/>}></Route>
+
  
  
  </Routes>

@@ -5,10 +5,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../Components/Navbar'
 import { BASE_URL } from '../Services/serverurl'
 import { useDispatch, useSelector } from 'react-redux'
-import { wishlistAPI } from '../Services/allAPI'
+import { checkoutAPI, checkoutstatusAPI, wishlistAPI } from '../Services/allAPI'
 import { setWishlist } from '../redux/state'
 import Pay from'../Components/Pay'
+import { green } from '@mui/material/colors'
+import { Button, Col } from 'react-bootstrap'
+import { borderRadius, height } from '@mui/system'
+
 function Listingcards({
+    id,
     listingId,
     creator,
     listingPhotos,
@@ -23,10 +28,19 @@ function Listingcards({
     totalPrice,
     booking,
     pay,
-    title
+    title,
+    payment,
+    reservation,
+    guest,
+    prop,
+    home,
+    wishl,
+    checkout
   }) {
-   // console.log('pay',pay);
+    //console.log('payId',id);
     //Slider for Images
+    console.log(checkout);
+    
 const[currentIndex,setCurrentIndex]=useState(0)
 //console.log('CurrentIndex',currentIndex);
 const navigate=useNavigate()
@@ -64,14 +78,15 @@ const patchWishlist=async()=>{
             dispatch(setWishlist(result.data.wishlist))
         }
     }
-   
-
 }
 
-
+const CheckOut=async()=>
+{
+const result=await checkoutAPI(listingId)
+const result2=await checkoutstatusAPI(id)
+}
  return (
    <>
-  
    <div className="listing-card" key={listingId} onClick={() => {
     navigate(`/properties/${listingId}`);
       }} >
@@ -93,34 +108,68 @@ const patchWishlist=async()=>{
            </div>
             </div>
         </div>
-    </div>
-    <h3>{city},{province},{country}</h3>
-    <p>{category}</p>
+        <h3>{city},{province},{country}</h3>
+    <p className='plistcard'>{category}</p>
     { ! booking ?(
         <>
-     <p>{type}</p>
-    <p><span>₹{price}</span>per night</p>
+     <p className='plistcard'>{type}</p>
+    <p className='plistcard'><span>₹{price}</span>per night</p>
         </>
     ):(<>
-    <p> {startDate} - {endDate}</p>
-    <p><span>₹ {totalPrice}</span></p>
-    <p onClick={(e)=>
-    {   e.stopPropagation();
-      
-    }
-        }>{pay && (<><Pay listingId={listingId} title={title} totalPrice={totalPrice}/></>)}</p>
+    <p className='plistcard'> {startDate} - {endDate}</p>
+    <p className='plistcard'><span>₹ {totalPrice}</span></p>
+    {reservation && <> 
+    <img  className="unique"src={`${BASE_URL}/uploads/${guest.profileImage}`} 
+     alt="user" width={50}height={50} /><h4>Reserved By:<span></span>{guest.firstname} </h4></>}
     </>)}
+    { !home && !reservation && !prop  && !wishl &&(
+        !payment ?
+        <>
+        <Pay listingId={listingId} title={title} totalPrice={totalPrice}  id={id} />
+        </>  :
+        <>  
+         <div style={{ margin: "10px", color: "#5F9EA0", fontSize: "15px",fontWeight:"bolder" }}>
+         Paid  Sucessfully</div>
+
+{!checkout ? (
+  <Button 
+    id="unique" 
+    style={{
+      padding: "8px 15px",
+      fontSize: "15px",
+      margin: "10px",
+      width: "100px",
+      color: "#F8F8F8",
+      backgroundColor: "#5F9EA0",
+      border: "none",
+      boxShadow: "1px 1px grey",
+      borderRadius: "3px",
+      cursor: "pointer"
+    }} 
+    onClick={(e) => {
+      e.stopPropagation();
+      CheckOut();
+    }}
+  >
+    Checkout
+  </Button>
+) : (
+  <div style={{ margin: "10px", color: "#5F9EA0", fontSize: "15px",fontWeight:"bolder" }}>
+    Checked out successfully
+  </div>
+)}
+
+         </>
+)
+    }
+    </div>
    <button className="favorite" disabled={!user} onClick={(e)=>
     {   e.stopPropagation();
         patchWishlist();
-    }
-        }>
-   {!pay && (isLiked ? <Favorite sx={{color:"red"}}/> : <Favorite sx={{color:"white"}}/>)}
-   
+    } }>
+   {!reservation && !prop && (isLiked ? <Favorite sx={{color:"red"}}/> : <Favorite sx={{color:"white"}}/>)}
    </button>
    </div>
-   
-  
    </>
   )
 }

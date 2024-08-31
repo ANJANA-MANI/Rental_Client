@@ -11,6 +11,8 @@ import { BiTrash } from 'react-icons/bi';
 import { addAPI } from '../Services/allAPI'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CreateListing() {
     const navigate=useNavigate()
@@ -128,11 +130,12 @@ const reqheader={
 const result=await addAPI(reqbody,reqheader)
 if(result.status==200)
 {
-    alert('added property');
+    toast.success('added property');
     navigate('/')
 }
 else{
-    alert(`${result.response.data}`)
+    console.log(`${result.response.data}`);
+    toast.warning(`${result.response}`)
 }
     }
     else{
@@ -433,7 +436,7 @@ alert('please login to continue')
           </button>
                 </form>
             </div>
-
+            <ToastContainer />
         </>
     )
 }

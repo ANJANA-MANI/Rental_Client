@@ -2,6 +2,7 @@
 @import "./breakpoints.scss";
 
 .listing-details {
+ 
   padding: 40px 130px 120px;
 
   @include xl {
@@ -57,6 +58,11 @@
     img {
       max-width: 280px;
       max-height: 220px;
+      transition: max-width 0.3s ease, max-height 0.3s ease; /* Smooth transition */
+    }
+    img:hover{
+   
+      border: 3px solid aliceblue;
     }
   }
 

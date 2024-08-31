@@ -6,8 +6,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-
+  position: fixed;
+  width: 100vw;
+  background-color:whitesmoke;
+  z-index:100000;
+  top: 0;
+  margin-bottom: 150px;
+ 
 
   @include sm {
     padding: 10px 20px;
@@ -26,10 +31,12 @@
     display: flex;
     gap: 40px;
     align-items: center;
+    background-color:whitesmoke;
 
     input {
       border: none;
       outline: none;
+      background-color:whitesmoke;
     }
 
     &:hover {

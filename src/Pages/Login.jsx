@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { setLogin } from '../redux/state'
 import {useDispatch} from 'react-redux'
 import { tokenAuthorizationContext } from '../context/TokenAuth'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Login() {
   const{isAuthorized,setIsAuthorized}=useContext(tokenAuthorizationContext)
   const[email,setEmail]=useState("")
@@ -41,7 +42,7 @@ dispatch(setLogin({
   setPassword("")
 }
 else{
-  alert(`${result.response.data}`)
+  toast.error(`${result.response.data}`)
 }
 }
   }
@@ -55,6 +56,7 @@ else{
       </form>
       <a href="/Register">New User? Sign Up</a>
     </div>
+    <ToastContainer />
    </div>
   )
 }

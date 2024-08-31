@@ -36,7 +36,7 @@ function Search() {
     <>
     <Navbar/>
 
-    <div className="title-list">
+    <div className="title-list" style={{marginTop:"120px"}}>
         <h1>
             Your Search..
         </h1>
@@ -53,7 +53,6 @@ function Search() {
            type={type}
            price={price}
            booking={booking}
-          
           />))}
                
            </div>):(<>

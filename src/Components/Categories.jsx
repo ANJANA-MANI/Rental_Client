@@ -17,8 +17,8 @@ function Categories() {
 
         {categories?.slice(1, 7).map((category, index) => (
     
-          <Link to={`/properties/category/${category.label}`}>
-               <div className="category" key={index}>
+          <Link to={`/properties/category/${category.label}`} key={index}>
+               <div className="category" >
               <img src={category.img} alt={category.label} />
               <div className="overlay"></div>
               <div className="category_text">

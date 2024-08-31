@@ -7,7 +7,7 @@ import 'react-date-range/dist/styles.css'
 import "react-date-range/dist/theme/default.css"
 import { DateRange } from 'react-date-range'
 import Navbar from '../Components/Navbar'
-import { bookingAPI, propertyAPI } from '../Services/allAPI'
+import { bookingAPI, propertyAPI,getbookedPropertyAPI } from '../Services/allAPI'
 import { BASE_URL } from '../Services/serverurl'
 import  Loader from '../Components/Loader'
 import { useSelector } from 'react-redux'
@@ -26,6 +26,8 @@ function ListingDetails() {
        // console.log('details page',result.data);
           setListing(result.data);
           setLoading(false);
+         //checkAvailability(result.data._id, dateRange[0].startDate, dateRange[0].endDate);
+        
         }
          
      } catch (error) {
@@ -59,7 +61,7 @@ const handleSelect=(ranges)=>{
 }
 const start=new Date(dateRange[0].startDate)
 const end=new Date(dateRange[0].endDate)
-const dayCount=Math.round(end-start)/(1000*60*60*24)
+const dayCount=Math.max(Math.round((end - start) / (1000 * 60 * 60 * 24)), 1)
 useEffect(() => {
    
 }, [dateRange]);
@@ -91,7 +93,7 @@ if(result.status==200)
   <Navbar/>
 
 
-<div className="listing-details">
+<div className="listing-details" style={{marginTop:"120px"}}>
 
 <div className="title">
     <h1>{listing?.title}</h1>
@@ -107,7 +109,7 @@ if(result.status==200)
     <hr />
 
     <div className="profile">
-    <img src={`${BASE_URL}/uploads/${listing?.owner.profileImage}`} alt="user" srcset="" />
+    <img src={`${BASE_URL}/uploads/${listing?.owner.profileImage}`} alt="user"  />
     <h3>Hosted by {listing?.owner?.firstname}</h3>
     </div>
 
@@ -140,8 +142,7 @@ if(result.status==200)
                 
                 
             </div>
-            
-            <div className="date-range-calendar">
+            {listing?.bookingstatus==true?( <div className="date-range-calendar">
             <h2>How Long would you like to stay?</h2>
         <DateRange ranges={dateRange} onChange={handleSelect} minDate={new Date()}/>
          
@@ -154,11 +155,43 @@ if(result.status==200)
            
             <button className='button' onClick={handleBooking}>Booking</button>
         
-            </div>
-
+            </div>):(<div style={{ 
+    padding: '10px',
+    width: "350px",
+    height: "160px",
+    border: '1px solid #ccc', 
+    borderRadius: '5px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+}}>
+    <p style={{
+        fontSize: '18px', // Corrected the font size
+        color: 'black',
+        fontSize:"25px",
+        margin: 0 // Remove margin to center text vertically better
+    }}>Booking closed</p>
+    <button id="dbtn"
+        disabled 
+        style={{ 
+            padding: '6px 10px', 
+            backgroundColor: '#ccc', 
+            border: 'none', 
+            borderRadius: '3px',
+            marginTop: '10px' ,
+            width:"150px",
+            color:"white",
+            fontSize:"15px",
+            cursor: 'not-allowed'
+        }}
+    >
+        Request
+    </button>
+</div>
+)}    
     </div>
     </div>
-   
     </>
 
    

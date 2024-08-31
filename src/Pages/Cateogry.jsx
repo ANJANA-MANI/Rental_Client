@@ -64,7 +64,7 @@ function Cateogry() {
            type={type}
            price={price}
            booking={booking}
-          
+            home={true}
           />))}
                
            </div>):(<>

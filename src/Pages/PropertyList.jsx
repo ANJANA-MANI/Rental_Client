@@ -5,6 +5,7 @@ import Listingcards from '../Components/Listingcards'
 import { useDispatch, useSelector } from 'react-redux'
 import { setPropertylist } from '../redux/state'
 import { propertiesAPI, propertyAPI } from '../Services/allAPI'
+
 import Loader from '../Components/Loader'
 
 function PropertyList() {
@@ -37,10 +38,8 @@ function PropertyList() {
     <>
       <Navbar />
 
-      <div className="title-list">
-        <h1>
-          Your Property List
-        </h1>
+<div className="title-listl">
+        <h1>Your Property List</h1>
         {Propertylist.length > 0 ? (<div className="list">
 
           {Propertylist.map(({ _id, owner, listingPhotos, city, province, country, category, type, price, booking = false }) => (<Listingcards
@@ -54,7 +53,7 @@ function PropertyList() {
             type={type}
             price={price}
             booking={booking}
-
+            prop={true}
           />))}
 
         </div>) : (<>
@@ -62,6 +61,9 @@ function PropertyList() {
           <img src="/assets/empty.gif" alt="pic" srcset="" /></>)}
 
       </div>
+
+
+
     </>
   )
 
