@@ -6,7 +6,7 @@ import { Category } from '@mui/icons-material';
 function Categories() {
  
   return (
-   <div className="categories">
+   <div className="categories" >
     <h1>
       Explore Top Categories
     </h1>

@@ -42,7 +42,7 @@ function Search() {
         </h1>
         {listings?.length>0?(<div className="list">
           
-          {listings.map(({_id,owner,listingPhotos,city,province,country,category,type,price,booking=false})=>(<Listingcards 
+          {listings.map(({_id,owner,listingPhotos,city,province,country,category,type,price,booking=false,search=true})=>(<Listingcards 
            listingId={_id}
            creator={owner}
            listingPhotos={listingPhotos}
@@ -53,6 +53,7 @@ function Search() {
            type={type}
            price={price}
            booking={booking}
+           search={search}
           />))}
                
            </div>):(<>

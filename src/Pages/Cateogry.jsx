@@ -47,7 +47,7 @@ function Cateogry() {
 
     <Navbar/>
 
-    <div className="title-list">
+    <div className="title-list" style={{marginTop:"150px"}}>
         <h1>
             {category} Listings
         </h1>

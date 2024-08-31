@@ -46,13 +46,11 @@ function Navbar({ hide }) {
 
         <div className="navbar_right">
           {user ? (
-            <a href="/Createlisting" className="host">
-              Become A Host
-            </a>
+             <Link to="/Createlisting" style={{textDecoration:"none",color:"darkblue",fontWeight:"bolder"}}> Become A Host</Link>
           ) : (
-            <a href="/login" className="host">
-              Become A Host
-            </a>
+            <Link to="/Login" style={{textDecoration:"none",color:"darkblue",fontWeight:"bolder",
+
+            }}> Become A Host</Link>
           )}
 
           <IconButton

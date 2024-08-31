@@ -35,7 +35,8 @@ function Listingcards({
     prop,
     home,
     wishl,
-    checkout
+    checkout,
+    search
   }) {
     //console.log('payId',id);
     //Slider for Images
@@ -122,7 +123,7 @@ const result2=await checkoutstatusAPI(id)
     <img  className="unique"src={`${BASE_URL}/uploads/${guest.profileImage}`} 
      alt="user" width={50}height={50} /><h4>Reserved By:<span></span>{guest.firstname} </h4></>}
     </>)}
-    { !home && !reservation && !prop  && !wishl &&(
+    { !home && !reservation && !prop  && !wishl && !search &&(
         !payment ?
         <>
         <Pay listingId={listingId} title={title} totalPrice={totalPrice}  id={id} />
